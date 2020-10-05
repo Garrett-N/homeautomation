@@ -28,11 +28,11 @@ from_sunset = abs(sunset - now)
 from_sunrise = abs(sunrise - now)
 
 # turn on lights at sunset
-if from_sunset > datetime.timedelta(minutes=5):
+if from_sunset < datetime.timedelta(minutes=5):
 	os.system(porch_on)
 	os.system(patio_on)
 
 # turn off lights at sunrise
-if from_sunrise > datetime.timedelta(minutes=5):
+if from_sunrise < datetime.timedelta(minutes=5):
 	os.system(porch_off)
 	os.system(patio_off)

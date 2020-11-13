@@ -7,18 +7,26 @@ import os
 import datetime
 from suntime import Sun, SunTimeException
 import pytz
+import socket
 
 # my location
 lat = 42
 long = -88.2 
 sun = Sun(lat, long)
 
-# hardcoded things for now
-plug2_on = "/usr/bin/python3 /home/gman/ouimeaux/client.py --device 10.0.0.51 --on"
-porch_on = "/usr/bin/python3 /home/gman/ouimeaux/client.py --device 10.0.0.39 --on"
-porch_off = "/usr/bin/python3 /home/gman/ouimeaux/client.py --device 10.0.0.39 --off"
-patio_on = "/usr/bin/python3 /home/gman/ouimeaux/client.py --device 10.0.0.122 --on"
-patio_off = "/usr/bin/python3 /home/gman/ouimeaux/client.py --device 10.0.0.122 --off"
+# my devices now have hostnames on my network
+# the ouimeaux only works with IP addresses so 
+# i need to get the ip addresses
+plug2_ip = socket.gethostbyname("plug2")
+porch_ip = socket.gethostbyname("porch")
+patio_ip = socket.gethostbyname("patio")
+
+# client commands that will be executed 
+plug2_on = "/usr/bin/python3 /home/gman/ouimeaux/client.py --device " + plug2_ip + " --on"
+porch_on = "/usr/bin/python3 /home/gman/ouimeaux/client.py --device " + porch_ip + " --on"
+porch_off = "/usr/bin/python3 /home/gman/ouimeaux/client.py --device " + porch_ip + " --off"
+patio_on = "/usr/bin/python3 /home/gman/ouimeaux/client.py --device " + patio_ip + " --on"
+patio_off = "/usr/bin/python3 /home/gman/ouimeaux/client.py --device " + patio_ip + " --off"
 
 sunrise = sun.get_local_sunrise_time()
 sunset = sun.get_local_sunset_time()

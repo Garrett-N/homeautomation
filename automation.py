@@ -17,12 +17,12 @@ sun = Sun(lat, long)
 # my devices now have hostnames on my network
 # the ouimeaux only works with IP addresses so 
 # i need to get the ip addresses
-plug2_ip = socket.gethostbyname("plug2")
+#plug2_ip = socket.gethostbyname("plug2")
 porch_ip = socket.gethostbyname("porch")
 patio_ip = socket.gethostbyname("patio")
 
 # client commands that will be executed 
-plug2_on = "/usr/bin/python3 /home/gman/ouimeaux/client.py --device " + plug2_ip + " --on"
+#plug2_on = "/usr/bin/python3 /home/gman/ouimeaux/client.py --device " + plug2_ip + " --on"
 porch_on = "/usr/bin/python3 /home/gman/ouimeaux/client.py --device " + porch_ip + " --on"
 porch_off = "/usr/bin/python3 /home/gman/ouimeaux/client.py --device " + porch_ip + " --off"
 patio_on = "/usr/bin/python3 /home/gman/ouimeaux/client.py --device " + patio_ip + " --on"
@@ -37,10 +37,12 @@ from_sunrise = abs(sunrise - now)
 
 # turn on lights at sunset
 if from_sunset < datetime.timedelta(minutes=5):
+	print("Turning on the lights.")
 	os.system(porch_on)
 	os.system(patio_on)
 
 # turn off lights at sunrise
 if from_sunrise < datetime.timedelta(minutes=5):
+	print("Turning off the lights.")
 	os.system(porch_off)
 	os.system(patio_off)
